@@ -301,6 +301,7 @@ h1, h2, h3, h4, h5, h6, figure {
   background-repeat: no-repeat;
   position: relative;
   width: 100%;
+  background-image: url("../images/noivado2.jpeg")
 }
 .fh5co-cover .overlay {
   z-index: 0;
@@ -318,6 +319,7 @@ h1, h2, h3, h4, h5, h6, figure {
 @media screen and (max-width: 768px) {
   .fh5co-cover {
     height: 600px;
+    background-image: url("../images/noivado2.1.jpeg")
   }
 }
 .fh5co-cover .display-t,
@@ -648,95 +650,6 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-gallery-list li {
   display: block;
-  padding: 0;
-  margin: 0 0 10px 1%;
-  list-style: none;
-  min-height: 400px;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  float: left;
-  clear: left;
-  position: relative;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  border-radius: 7px;
-}
-@media screen and (max-width: 480px) {
-  #fh5co-gallery-list li {
-    margin-left: 0;
-  }
-}
-#fh5co-gallery-list li a {
-  min-height: 400px;
-  padding: 2em;
-  position: relative;
-  width: 100%;
-  display: block;
-}
-#fh5co-gallery-list li a:before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: "";
-  z-index: 80;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  border-radius: 7px;
-  background: rgba(0, 0, 0, 0.2);
-}
-#fh5co-gallery-list li a:hover:before {
-  background: rgba(0, 0, 0, 0.5);
-}
-#fh5co-gallery-list li a .case-studies-summary {
-  width: auto;
-  bottom: 2em;
-  left: 2em;
-  right: 2em;
-  position: absolute;
-  z-index: 100;
-}
-@media screen and (max-width: 768px) {
-  #fh5co-gallery-list li a .case-studies-summary {
-    bottom: 1em;
-    left: 1em;
-    right: 1em;
-  }
-}
-#fh5co-gallery-list li a .case-studies-summary span {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
-}
-#fh5co-gallery-list li a .case-studies-summary h2 {
-  color: #fff;
-  margin-bottom: 0;
-}
-@media screen and (max-width: 768px) {
-  #fh5co-gallery-list li a .case-studies-summary h2 {
-    font-size: 20px;
-  }
-}
-#fh5co-gallery-list li.one-third {
-  width: 32.3%;
-}
-@media screen and (max-width: 768px) {
-  #fh5co-gallery-list li.one-third {
-    width: 49%;
-  }
-}
-@media screen and (max-width: 480px) {
-  #fh5co-gallery-list li.one-third {
-    width: 100%;
-  }
 }
 
 #map {
@@ -826,8 +739,8 @@ form label {
 #fh5co-header .display-tc,
 #fh5co-counter .display-tc,
 .fh5co-cover .display-tc {
-  display: table-cell !important;
-  vertical-align: middle;
+  /* display: table-cell !important;
+  vertical-align: middle; */
 }
 #fh5co-header .display-tc h1, #fh5co-header .display-tc h2,
 #fh5co-counter .display-tc h1,
@@ -935,13 +848,14 @@ form label {
 
 .simply-countdown {
   /* The countdown */
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+  display: flex;
 }
 
 .simply-countdown > .simply-section {
   /* coutndown blocks */
   display: inline-block;
-  width: 100px;
+  width: 60px;
   height: 100px;
   margin: 0 4px;
   /* border: 1px solid 89CFF0; */
@@ -950,7 +864,11 @@ form label {
   -ms-border-radius: 50%;
   border-radius: 50%;
   position: relative;
-  animation: pulse 1s ease infinite;
+  /* animation: pulse 1s ease infinite; */
+}
+
+.simply-minutes-section {
+  margin-left: auto!important;
 }
 
 @keyframes pulse {
@@ -969,7 +887,7 @@ form label {
   display: table-cell;
   vertical-align: middle;
   height: 100px;
-  width: 100px;
+  width: 60px;
 }
 
 .simply-countdown > .simply-section .simply-amount,
@@ -1841,4 +1759,95 @@ form label {
   opacity: 0;
 }
 
-/*# sourceMappingURL=style.css.map */
+
+
+header {
+  background-color: #fff8f0;
+  /* padding: 2rem; */
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #a0522d;
+}
+
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.gift-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.gift-card:hover {
+  transform: translateY(-4px);
+}
+
+.gift-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.gift-details {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gift-details h2 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.gift-details p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.gift-details .price {
+  font-weight: bold;
+  color: #a0522d;
+  margin-bottom: 1rem;
+}
+
+.gift-details button {
+  background-color: #a0522d;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.gift-details button:hover {
+  background-color: #8b4513;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-size: 0.9rem;
+}
