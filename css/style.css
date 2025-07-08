@@ -1794,6 +1794,7 @@ main {
   display: flex;
   flex-direction: column;
   transition: transform 0.2s;
+  cursor: pointer;
 }
 
 .gift-card:hover {
@@ -1853,4 +1854,13 @@ footer {
   padding: 2rem;
   color: #999;
   font-size: 0.9rem;
+}
+
+.pix-qrcode-container {
+  margin-top: 20px;
+}
+
+.pix-key-container .input-group {
+  margin: 0 auto;
+  max-width: 400px;
 }

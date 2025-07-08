@@ -114,7 +114,7 @@
             <div class="couple-half">
               <div class="bride">
                 <img
-                  src="images/profile_noiva.png"
+                  src="images/profile_noiva.jpeg"
                   alt="groom"
                   class="img-responsive"
                 />
@@ -589,11 +589,43 @@
           </div>
         </div>
       </div>
-
-      <h3>Imagem do QR Code:</h3>
-      <img id="qrcode-img" alt="QR Code Gerado" /><br /><br />
-      <h3>QR Code PIX:</h3>
-      <canvas id="qrcode"></canvas>
+    <!-- Modal do Bootstrap para PIX -->
+    <div class="modal fade" id="pixModal" tabindex="-1" role="dialog" aria-labelledby="pixModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="pixModalLabel">Detalhes do Presente</h4>
+          </div>
+          <div class="modal-body text-center">
+            <!-- Conteúdo do card clicado -->
+            <div class="gift-modal-content">
+              <img id="modal-gift-img" class="img-responsive center-block" style="max-height: 100px; margin-bottom: 20px;">
+              <h4 id="modal-gift-title" style="margin-bottom: 15px;"></h4>
+              <p id="modal-gift-price" class="price" style="font-size: 17px; margin-bottom: 10px; color: #89CFF0"></p>
+            </div>
+            
+            <hr>
+            
+            <!-- Informações de PIX -->
+            <h4>Chave PIX</h4>
+            <div class="pix-key-container">
+              <div class="input-group">
+                <input type="text" style="height: 40px;" class="form-control" id="pix-key" value="64999559982" readonly>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" style="height: 40px;" id="copy-pix-button">Copiar</button>
+                </span>
+              </div>
+            </div>
+            <div class="pix-qrcode-container mt-4">
+              <h4>QR Code PIX</h4>
+              <img id="pix-qrcode-img" src="images/qrcode.jpeg" class="img-responsive center-block" alt="QR Code PIX">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="gototop js-top">
@@ -643,72 +675,57 @@
     </script>
 
     <script>
-      function gerarQRCode() {
-        const chave = "62982364065";
-        const nome = "JUNIOR AUGUSTO X ESBALTAR";
-        const cidade = "ANAPOLIS";
-        const valor = "100.00";
-
-        const payloadSemCRC =
-          "000201" +
-          "26580014BR.GOV.BCB.PIX" +
-          "01" +
-          "BR.GOV.BCB.PIX" +
-          chave.length.toString().padStart(2, "0") +
-          chave +
-          "52040000" +
-          "5303986" +
-          (valor
-            ? "54" + valor.length.toString().padStart(2, "0") + valor
-            : "") +
-          "5802BR" +
-          "59" +
-          nome.length.toString().padStart(2, "0") +
-          nome +
-          "60" +
-          cidade.length.toString().padStart(2, "0") +
-          cidade +
-          "62070503***" +
-          "6304";
-
-        const crc = crc16(payloadSemCRC);
-
-        const payloadCompleto = payloadSemCRC + crc;
-        console.log(payloadCompleto);
-        // document.getElementById("payload").value = payloadCompleto;
-
-        const qr = new QRious({
-          element: document.getElementById("qrcode"),
-          value: payloadCompleto,
-          size: 250,
+      // Função para o modal PIX usando Bootstrap
+      $(document).ready(function() {
+        // Seleciona todos os elementos com a classe gift-card
+        const giftCards = document.querySelectorAll('.gift-card');
+        const pixKey = document.getElementById('pix-key');
+        const copyBtn = document.getElementById('copy-pix-button');
+        const qrCodeImg = document.getElementById('pix-qrcode-img');
+        
+        // Elementos do modal para exibir conteúdo do card
+        const modalGiftImg = document.getElementById('modal-gift-img');
+        const modalGiftTitle = document.getElementById('modal-gift-title');
+        const modalGiftPrice = document.getElementById('modal-gift-price');
+        
+        // Adiciona evento de clique a cada gift-card
+        giftCards.forEach(card => {
+          card.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Captura informações do card clicado
+            const cardImg = this.querySelector('img');
+            const cardTitle = this.querySelector('h2');
+            const cardPrice = this.querySelector('.price');
+            
+            // Preenche o modal com as informações do card
+            if (cardImg) modalGiftImg.src = cardImg.src;
+            if (cardTitle) modalGiftTitle.textContent = cardTitle.textContent;
+            if (cardPrice) modalGiftPrice.textContent = cardPrice.textContent;
+            
+            // Abre o modal usando jQuery do Bootstrap
+            $('#pixModal').modal('show');
+            
+            // Gera o QR Code PIX
+            const pixKeyValue = pixKey.value;
+            // const qrCodeUrl = `https://chart.googleapis.com/chart?cht=qr&chl=${encodeURIComponent(pixKeyValue)}&chs=250x250&chld=L|0`;
+            // qrCodeImg.src = qrCodeUrl;
+          });
         });
-
-        const canvas = document.getElementById("qrcode");
-        const img = document.getElementById("qrcode-img");
-        console.log(canvas);
-        img.src = canvas.toDataURL("image/png");
-
-        const link = document.getElementById("download-link");
-        link.href = canvas.toDataURL("image/png");
-      }
-
-      function crc16(str) {
-        let crc = 0xffff;
-        for (let c of str) {
-          crc ^= c.charCodeAt(0) << 8;
-          for (let i = 0; i < 8; i++) {
-            if ((crc & 0x8000) !== 0) {
-              crc = (crc << 1) ^ 0x1021;
-            } else {
-              crc <<= 1;
-            }
-            crc &= 0xffff;
-          }
-        }
-        return crc.toString(16).toUpperCase().padStart(4, "0");
-      }
-
-      gerarQRCode();
+        
+        // Função para copiar a chave PIX
+        copyBtn.addEventListener('click', function() {
+          pixKey.select();
+          document.execCommand('copy');
+          
+          // Feedback visual de que foi copiado
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copiado!';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+        });
+      });
     </script>
   </body>
 </html>
