@@ -1803,7 +1803,7 @@ main {
 .gift-card img {
   width: 100%;
   height: 180px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .gift-details {
@@ -1815,8 +1815,10 @@ main {
 }
 
 .gift-details h2 {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   margin: 0 0 0.5rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .gift-details p {
@@ -1826,23 +1828,24 @@ main {
 
 .gift-details .price {
   font-weight: bold;
-  color: #a0522d;
+  color: #89CFF0;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .gift-details button {
-  background-color: #a0522d;
+  background-color: #89CFF0;
   color: white;
   border: none;
   padding: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.3rem;
   transition: background-color 0.2s;
 }
 
 .gift-details button:hover {
-  background-color: #8b4513;
+  background-color: #89CFF0;
 }
 
 footer {
