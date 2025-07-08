@@ -264,7 +264,7 @@
                   ></div>
                   <div class="timeline-panel">
                     <div class="timeline-heading">
-                      <h3 class="timeline-title">Noivado</h3>
+                      <h3 class="timeline-title">Pedido de casamento</h3>
                       <span class="date">09 de novembro de 2024</span>
                     </div>
                     <div class="timeline-body">
@@ -285,7 +285,7 @@
         </div>
       </div>
 
-      <div id="fh5co-couple-story">
+      <div id="fh5co-gift">
         <div class="container">
           <div class="row">
             <div
@@ -666,6 +666,25 @@
         month: d.getMonth() + 1,
         day: d.getDate(),
         enableUtc: false,
+      });
+      
+      // Verificar âncora na URL e fazer scroll até a seção de presentes
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log(window.location.hash);
+        if (window.location.hash === '#presentes') {
+          // Removemos o hash da URL para evitar duplicação
+          history.replaceState("", document.title, window.location.pathname + window.location.search);
+          
+          // Encontra o elemento de destino
+          const giftSection = document.getElementById('fh5co-gift');
+          if (giftSection) {
+            // Aguarda um pequeno tempo para garantir que tudo carregou
+            setTimeout(function() {
+              // Faz scroll suave até a seção
+              giftSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1000);
+          }
+        }
       });
     </script>
 
